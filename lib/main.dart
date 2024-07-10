@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:job_task/core/routes/routes.dart';
 import 'package:job_task/core/styles/theme.dart';
 
 void main() => runApp(const MyApp());
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
         theme: appThemeData,
+        routerConfig: goRouter,
       ),
     );
   }

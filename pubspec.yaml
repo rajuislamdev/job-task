@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_screenutil: ^5.9.3
   go_router: ^14.2.0
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:
@@ -77,9 +78,9 @@ flutter:
   fonts:
     - family: NotoSerifBengali
       fonts:
-        - asset: assets/fonts/NotoSerifBengali-Bold
+        - asset: assets/fonts/NotoSerifBengali-Bold.ttf
         - asset: assets/fonts/NotoSerifBengali-Medium.ttf
-        - asset: assets/NotoSerifBengali-Regular.ttf
+        - asset: assets/fonts/NotoSerifBengali-Regular.ttf
 
   #
   # For details regarding fonts from package dependencies,

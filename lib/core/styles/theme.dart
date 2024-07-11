@@ -12,7 +12,7 @@ final ThemeData appThemeData = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     elevation: 0,
-    backgroundColor: AppColors.primary,
+    backgroundColor: AppColors.secondary,
     foregroundColor: AppColors.secondary,
     titleTextStyle: TextStyle(
       fontSize: 16.sp,

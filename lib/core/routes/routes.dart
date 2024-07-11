@@ -41,7 +41,7 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           path: Routes.home,
           parentNavigatorKey: _shellNavigatorKey,
-          pageBuilder: (context, state) => const NoTransitionPage(
+          pageBuilder: (context, state) => NoTransitionPage(
             child: HomeView(),
           ),
         ),

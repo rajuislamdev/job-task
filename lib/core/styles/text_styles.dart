@@ -12,7 +12,7 @@ class AppTextStyle {
       fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.black);
 
   static const TextStyle blackS14B600 = TextStyle(
-      fontSize: 14, fontWeight: FontWeight.w500, color: AppColors.black);
+      fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.black); 
 
   static const TextStyle blackS12B600 = TextStyle(
       fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.black);

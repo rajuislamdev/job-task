@@ -62,7 +62,7 @@ class AppBottomNavbar extends StatelessWidget {
     required IconData icon,
     required int index,
     required bool isActive,
-    required VoidCallback onPressed,
+    required VoidCallback onPressed, 
   }) {
     return Padding(
       padding: EdgeInsets.only(
@@ -76,12 +76,10 @@ class AppBottomNavbar extends StatelessWidget {
           children: [
             Icon(icon),
             const SizedBox(height: 4),
-            Visibility(
-              visible: isActive,
-              child: const CircleAvatar(
-                radius: 3,
-                backgroundColor: AppColors.primary,
-              ),
+            CircleAvatar(
+              radius: 3,
+              backgroundColor:
+                  !isActive ? Colors.transparent : AppColors.primary,
             )
           ],
         ),

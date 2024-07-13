@@ -48,7 +48,7 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           path: Routes.activity,
           parentNavigatorKey: _shellNavigatorKey,
-          pageBuilder: (context, state) => const NoTransitionPage(
+          pageBuilder: (context, state) => NoTransitionPage(
             child: ActivityView(),
           ),
         ),

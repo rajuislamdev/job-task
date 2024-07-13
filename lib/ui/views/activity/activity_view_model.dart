@@ -7,30 +7,38 @@ import 'package:job_task/repositoies/activity/activity_repository.dart';
 import 'package:job_task/services/api_interceptors.dart';
 
 class ActivityViewModel extends BaseModel {
+  // Dependencies
   final ActivityRepository _activityRepository = Get.find<ActivityRepository>();
 
+  // Reactive properties
+  final RxList<DateTime> _days = <DateTime>[].obs;
+  final RxString _selectedDay =
+      DateFormat('MMMM d, yyyy').format(DateTime.now()).obs;
+  final RxList<ActivityModel> _activities = <ActivityModel>[].obs;
+
+  // Getters for reactive properties
+  List<DateTime> get days => _days;
+  String get selectedDay => _selectedDay.value;
+  List<ActivityModel> get activities => _activities;
+
+  // Initialization
   @override
   void onInit() {
     super.onInit();
-    getDays();
-    fetchActivities();
+    _initializeData();
   }
 
-  final RxList<DateTime> _days = <DateTime>[].obs;
-  List<DateTime> get days => _days;
-
-  final RxString _selectedDay =
-      DateFormat('MMMM d, yyyy').format(DateTime.now()).obs;
-  String get selectedDay => _selectedDay.value;
-
-  final RxList<ActivityModel> _activities = <ActivityModel>[].obs;
-  List<ActivityModel> get activities => _activities;
+  // Methods
+  void _initializeData() {
+    _generateDays();
+    fetchActivities();
+  }
 
   String getCurrentDateMonth() {
     return 'আজ, ${DateFormat('d MMMM', 'bn_BD').format(DateTime.now())}';
   }
 
-  void getDays() {
+  void _generateDays() {
     DateTime now = DateTime.now();
     _days.clear();
     for (int i = -7; i <= 7; i++) {
@@ -43,7 +51,7 @@ class ActivityViewModel extends BaseModel {
     _selectedDay.value = day;
   }
 
-  void fetchActivities() async {
+  Future<void> fetchActivities() async {
     setLoading(true);
     _activities.clear();
     try {

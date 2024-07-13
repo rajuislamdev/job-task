@@ -13,7 +13,7 @@ import 'package:job_task/ui/views/activity/widgets/filter_card.dart';
 
 class ActivityView extends StatelessWidget {
   ActivityView({super.key});
-  final ActivityViewModel viewModel = Get.put(ActivityViewModel());
+  final ActivityViewModel _viewModel = Get.find<ActivityViewModel>();
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class ActivityView extends StatelessWidget {
           Gap(20.h),
           _buildActivityFilterWidget(),
           Gap(20.h),
-          _buildTodayActicityWidget()
+          _buildTodayActivityWidget()
         ],
       ),
     );
@@ -77,7 +77,7 @@ class ActivityView extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          viewModel.getCurrentDateMonth(),
+          _viewModel.getCurrentDateMonth(),
           style: AppTextStyle.blackS16B700,
         ),
         AddButton(
@@ -110,9 +110,9 @@ class ActivityView extends StatelessWidget {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: viewModel.days.length,
+            itemCount: _viewModel.days.length,
             itemBuilder: (context, index) => FilterCard(
-              dateTime: viewModel.days[index],
+              dateTime: _viewModel.days[index],
             ),
           );
         },
@@ -120,7 +120,7 @@ class ActivityView extends StatelessWidget {
     );
   }
 
-  Widget _buildTodayActicityWidget() {
+  Widget _buildTodayActivityWidget() {
     return Expanded(
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20).copyWith(top: 20.h),
@@ -135,15 +135,35 @@ class ActivityView extends StatelessWidget {
             ),
             Gap(20.h),
             Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                shrinkWrap: true,
-                itemBuilder: (context, index) => Padding(
-                  padding: EdgeInsets.only(bottom: 20.h),
-                  child: ActivityCardWidget(
-                    index: index,
-                  ),
-                ),
+              child: Obx(
+                () {
+                  if (_viewModel.isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else if (_viewModel.errorMessage.isNotEmpty) {
+                    return Center(
+                      child: Text(_viewModel.errorMessage.value),
+                    );
+                  } else {
+                    return RefreshIndicator(
+                      onRefresh: () async {
+                        _viewModel.fetchActivities();
+                      },
+                      child: ListView.builder(
+                        itemCount: _viewModel.activities.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => Padding(
+                          padding: EdgeInsets.only(bottom: 20.h),
+                          child: ActivityCardWidget(
+                            index: index,
+                            activityModel: _viewModel.activities[index],
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                },
               ),
             )
           ],

@@ -4,12 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:job_task/core/styles/app_color.dart';
 import 'package:job_task/core/styles/text_styles.dart';
+import 'package:job_task/models/activity_model.dart';
 
 class ActivityCardWidget extends StatelessWidget {
   final int index;
+  final ActivityModel activityModel;
   const ActivityCardWidget({
     super.key,
     required this.index,
+    required this.activityModel,
   });
 
   @override
@@ -65,7 +68,7 @@ class ActivityCardWidget extends StatelessWidget {
                 ),
                 Gap(8.h),
                 Text(
-                  text,
+                  activityModel.name,
                   maxLines: 4,
                   overflow: TextOverflow.ellipsis,
                   style: AppTextStyle.blackS14B600.copyWith(
@@ -74,7 +77,7 @@ class ActivityCardWidget extends StatelessWidget {
                 ),
                 Gap(8.h),
                 Text(
-                  'বাক্য',
+                  activityModel.category,
                   style: AppTextStyle.blackS12B600.copyWith(
                     fontWeight: FontWeight.w500,
                     color: AppColors.secondary,
@@ -90,7 +93,7 @@ class ActivityCardWidget extends StatelessWidget {
                     ),
                     Gap(4.w),
                     Text(
-                      'চট্টগ্রাম, বাংলাদেশ',
+                      activityModel.location,
                       style: AppTextStyle.blackS12B600.copyWith(
                         fontWeight: FontWeight.w500,
                         color: AppColors.secondary,
@@ -124,7 +127,4 @@ class ActivityCardWidget extends StatelessWidget {
       ),
     );
   }
-
-  final String text =
-      "সেথায় তোমার কিশোরী বধূটি মাটির প্রদীপ ধরি, তুলসীর মূলে প্রণাম যে আঁকে হয়ত তোমারে স্মরি।";
 }

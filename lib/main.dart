@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:job_task/core/di/dependency_injection.dart';
 import 'package:job_task/core/routes/routes.dart';
 import 'package:job_task/core/styles/app_color.dart';
 import 'package:job_task/core/styles/theme.dart';
@@ -9,6 +10,7 @@ import 'package:job_task/core/styles/theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('bn');
+  await initDependencies();
   runApp(const MyApp());
 }
 

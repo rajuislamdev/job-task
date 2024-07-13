@@ -15,15 +15,18 @@ class FilterCard extends StatelessWidget {
     required this.dateTime,
   });
 
-  final ActivityViewModel _activityViewModel = Get.put(ActivityViewModel());
+  final ActivityViewModel _activityViewModel = Get.find<ActivityViewModel>();
   final DateFormat dateFormatter = DateFormat('MMMM d, yyyy');
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => InkWell(
-        onTap: () => _activityViewModel.setSelectedDay(
-          dateFormatter.format(dateTime),
-        ),
+        onTap: () {
+          _activityViewModel.setSelectedDay(
+            dateFormatter.format(dateTime),
+          );
+          _activityViewModel.fetchActivities();
+        },
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 12.h, horizontal: 8.w),
           padding: EdgeInsets.symmetric(horizontal: 6.w),
